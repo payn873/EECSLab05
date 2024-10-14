@@ -10,6 +10,7 @@
 
 int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]);
 int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]);
+int transposeMatrix(int m[SIZE][SIZE]);
 int printMatirx(int m[SIZE][SIZE]);
 
 int main() {
@@ -31,6 +32,7 @@ int main() {
 	};
 	addMatrices(m1, m2);
 	multiplyMatrices(m1, m2);
+	transposeMatrix(m1);
 }
 
 int printMatrix(int m[SIZE][SIZE]){
@@ -58,5 +60,16 @@ int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]){
 		}
 	}
 	printMatrix(m3);
+	return 0;
+}
+
+int transposeMatrix(int m[SIZE][SIZE]){
+	int mT[SIZE][SIZE];
+	for(int i = 0; i < SIZE; i++){
+		for(int k = 0; k < SIZE; k++){
+			mT[i][k] = m[k][i];
+		}
+	}
+	printMatrix(mT);
 	return 0;
 }
