@@ -12,12 +12,16 @@ int min(double *ar);
 double avg(double *ar, int start, int end);
 
 int main(){
+	/*Takes a sales input file and outputs a sales report*/
+	//Input File
 	FILE *salesReport;
+	//Output File
 	FILE *fReport;
+	//Array for monetary value of monthly sales
 	double sales[12];
 	char ch[50];
-	void monthlyReport(FILE fReport, double sales);
 	salesReport = fopen("test.txt", "r");
+	//Creates array of sales figures
 	printf("Enter sales report file: \n");
 	for(int i = 0; i < 12; i++){
 		fgets(ch, 25, salesReport);
@@ -25,9 +29,11 @@ int main(){
 	}
 	fclose(salesReport);
 	fReport = fopen("Sales_Report.txt", "w");
+	//Prints monthly sale data to output file
 	fprintf(fReport, "Monthly Sales Report for 2024\nMonth     Sales\n");
 	fprintf(fReport, "January   %10f\nFebruary  %10f\nMarch     %10f\nApril     %10f\nMay       %10f\nJune      %10f\nJuly      %10f\nAugust    %10f\nSeptember %10f\nOctober   %10f\nNovember  %10f\nDecember  %10f\n", sales[0], sales[1], sales[2], sales[3], sales[4], sales[5], sales[6], sales[7], sales[8], sales[9], sales[10], sales[11]);
 	fprintf(fReport, "\n\nSales Summary Report\nMinimum Sales:   ");
+	//Prints month of minimum sales to output file
 	if(min(sales) == 0){
 		fprintf(fReport, "%f  (Janurary)\n", sales[0]);
 	}else if(min(sales) == 1){
@@ -53,6 +59,7 @@ int main(){
 	}else if(min(sales) == 11){
 		fprintf(fReport, "%f  (December)\n", sales[11]);
 	}
+	//Prints month of maximum sales to output file
 	fprintf(fReport, "Maximum Sales   ");
 	if(max(sales) == 0){
                 fprintf(fReport, "%f  (Janurary)\n", sales[0]);
@@ -79,7 +86,9 @@ int main(){
         }else if(max(sales) == 11){
                 fprintf(fReport, "%f  (December)\n", sales[11]);
         }
+	//Prints average sales amount to output file
 	fprintf(fReport, "Average Sales:   %f\n", avg(sales, 0, 11));
+	//Prints six month moving averages to output file
 	fprintf(fReport, "\nSix-Month Moving Average Report:\n\n");
 	fprintf(fReport, "January-June        %f\nFebruary-July       %f\nMarch-August        %f\nApril-September     %f\nMay-October         %f\nJune-November       %f\nJuly-December       %f\n\n", avg(sales,0,5), avg(sales,1,6), avg(sales,2,7), avg(sales,3,8), avg(sales,4,9), avg(sales,5,10), avg(sales,6,11));
 	fprintf(fReport, "Sales Report (Highest to Lowest):\n\nMonth          Sales\n");
@@ -126,9 +135,11 @@ int main(){
 }
 
 int max(double *ar){
+	/*Returns index of max value of an array*/
 	double max = 0.00;
 	int month;
 	for(int i = 0; i < 12; i++){
+		//Finding and updating max value and updating index
 		if(ar[i] > max){
 			max = ar[i];
 			month = i;
@@ -138,9 +149,11 @@ int max(double *ar){
 }
 
 int min(double *ar){
+	/*Returns index of min value of an array*/
 	double min = ar[max(ar)];
 	int month;
 	for(int i = 0; i<12; i++){
+		//Finding and updating min value and updating index
 		if(ar[i] < min){
 			min = ar[i];
 			month = i;
@@ -150,11 +163,15 @@ int min(double *ar){
 }
 
 double avg(double *ar, int start, int end){
+	/*Returns average value of a given section of an array*/
+	//Setting initial sum and amount values
 	double sum = 0.00;
 	double amount = 0.00;
+	//Goes through designated array section and adds to sum and amount
 	for(int i = start; i < end+1; i++){
 		sum += ar[i];
 		amount += 1.00;
 	}
+	//Returns the sum divided by the amount
 	return sum/amount;
 }
