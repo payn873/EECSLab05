@@ -8,6 +8,7 @@
 
 #define SIZE 5
 
+int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]);
 int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]);
 int printMatirx(int m[SIZE][SIZE]);
 
@@ -29,6 +30,7 @@ int main() {
 		{5,4,3,2,1}
 	};
 	addMatrices(m1, m2);
+	multiplyMatrices(m1, m2);
 }
 
 int printMatrix(int m[SIZE][SIZE]){
@@ -48,4 +50,13 @@ int addMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]){
 	return 0;
 }
 
-
+int multiplyMatrices(int m1[SIZE][SIZE], int m2[SIZE][SIZE]){
+	int m3[SIZE][SIZE];
+	for(int i = 0; i < SIZE; i++){
+		for (int k = 0; k < SIZE; k++){
+			m3[i][k] = m1[i][0]*m2[0][k] + m1[i][1]*m2[1][k] + m1[i][3]*m2[3][k] + m1[i][4]*m2[4][k];
+		}
+	}
+	printMatrix(m3);
+	return 0;
+}
